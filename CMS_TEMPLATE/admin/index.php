@@ -40,9 +40,9 @@
                     </div>
                     <div class="col-xs-9 text-right">
                     <?php
-//                        $query = "SELECT * FROM posts";
-//                        $query_response = mysqli_query($connection,$query);
-//                        $posts_count = mysqli_num_rows($query_response); 
+                        $query = "SELECT * FROM posts";
+                        $query_response = mysqli_query($connection,$query);
+                        $posts_count = mysqli_num_rows($query_response); 
                         
                         $query = "SELECT * FROM posts WHERE post_status = 'PUBLISHED'";
                         $query_response = mysqli_query($connection,$query);
