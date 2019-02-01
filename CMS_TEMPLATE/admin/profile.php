@@ -11,6 +11,9 @@
     if(isset($_POST["edit_user"])){
         extract($_POST);
 
+           if($old_user_password != $user_password){ // en caso de ser diferentes significa que fueron cambiados en el proceso
+        $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+    }
 
         $query = "UPDATE users SET "; // Whitespace after SET is required
         $query .= "user_name = '{$user_name}', ";
@@ -39,6 +42,7 @@
             while($row = mysqli_fetch_assoc($query_response))
             {
                 extract($row);
+                $old_user_password = $user_password;
             }
         }
 
@@ -69,7 +73,9 @@
                     </div>
 
    <form action="" method="post" enctype="multipart/form-data">
-        
+       
+         <input type="hidden" name="old_user_password" value="<?php echo $old_user_password;?>" />
+          
      <div class="form-group"><label for="user_name">Username</label>
     <input type="text" value="<?php echo $user_name;?>"class="form-control" name="user_name"></div>
     

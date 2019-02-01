@@ -17,7 +17,8 @@ if(isset($_POST['submit'])){
     $row = mysqli_fetch_assoc($select_randSalt_query);
     extract($row);
     echo($user_randsalt);
-    $password = crypt($password,$user_randsalt);
+    //$password = crypt($password,$user_randsalt);
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
     $query = "INSERT INTO users (user_name, user_email, user_password, user_role) VALUES('{$username}','{$email}','{$password}','subscriber')";
     
     $query_response=mysqli_query($connection,$query);

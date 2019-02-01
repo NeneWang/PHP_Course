@@ -32,13 +32,13 @@ if(isset($_POST['login'])){
         
         extract($row);
         
-        $salt = $row['user_randsalt']; // --> I added this
+       // $salt = $row['user_randsalt']; // --> I added this
         
     }
     
-    $password = crypt($password, $salt); // --> Now it uses salt!
+    //$password = crypt($password, $salt); // --> Now it uses salt!
     
-    if($username === $user_name && $password === $user_password){
+    if($username === $user_name && password_verify($password,$user_password)){
         
         $_SESSION['user_name'] = $user_name;
         

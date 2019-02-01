@@ -5,12 +5,13 @@ if(isset($_POST["create_user"])){
     //$post_date = date("d-m-y");
     $user_image='';
      // Crypting generic password stuff
-    $query = "SELECT user_randsalt FROM users";
-    $select_query = mysqli_query($connection, $query);
-    confirmQuery($select_query);
-    $row = mysqli_fetch_assoc($select_query);
-    $salt = $row['user_randsalt'];
-    $user_password = crypt($user_password,$salt); 
+//    $query = "SELECT user_randsalt FROM users";
+//    $select_query = mysqli_query($connection, $query);
+//    confirmQuery($select_query);
+//    $row = mysqli_fetch_assoc($select_query);
+   // $salt = $row['user_randsalt'];
+    $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+
         
  $query = "INSERT INTO users(user_name, user_password, user_firstname, user_lastname, user_email, user_image, user_role) ";
  

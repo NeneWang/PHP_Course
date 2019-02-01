@@ -4,12 +4,20 @@ if(isset($_POST["edit_user"])){
     extract($_POST);
     
     // Crypting generic password stuff
-    $query = "SELECT user_randsalt FROM users";
-    $select_query = mysqli_query($connection, $query);
-    confirmQuery($select_query);
-    $row = mysqli_fetch_assoc($select_query);
-    $salt = $row['user_randsalt'];
-    $user_password = crypt($user_password,$salt); 
+//    $query = "SELECT user_randsalt FROM users";
+//    $select_query = mysqli_query($connection, $query);
+//    confirmQuery($select_query);
+//    $row = mysqli_fetch_assoc($select_query);
+//    $salt = $row['user_randsalt'];
+   // echo $old_user_password;
+    if($old_user_password != $user_password){ // en caso de ser diferentes significa que fueron cambiados en el proceso
+        $user_password = password_hash($user_password, PASSWORD_BCRYPT, array('cost' => 12));
+    }
+        
+    
+    
+
+   // $user_password = crypt($user_password,$salt); 
 
     $query = "UPDATE users SET "; // Whitespace after SET is required
     $query .= "user_name = '{$user_name}', ";
@@ -39,7 +47,8 @@ if(isset($_GET["user_id"])){
     else{
         $row = mysqli_fetch_assoc($selected_post_data);
         extract($row);
-        
+        $old_user_password = $user_password;
+        //echo $old_user_password;
         
         
     }
@@ -50,6 +59,8 @@ if(isset($_GET["user_id"])){
    
 
    <form action="" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="old_user_password" value="<?php echo $old_user_password;?>" />
+        
         
      <div class="form-group"><label for="user_name">username</label>
     <input type="text" value="<?php echo $user_name;?>"class="form-control" name="user_name"></div>
