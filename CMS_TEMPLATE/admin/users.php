@@ -4,7 +4,7 @@
 ob_start();
 
 if(isset($_GET["delete"])){
-    extract($_GET);
+    extract(escape($_GET));
     $query = "DELETE FROM comments WHERE comment_id = {$delete}";
     $query_response = mysqli_query($connection,$query);
     confirmQuery($query_response);
@@ -12,7 +12,7 @@ if(isset($_GET["delete"])){
     }
 
 if(isset($_GET["approve_decision"])){
-    extract($_GET);
+    extract(escape($_GET));
     $query = "UPDATE comments SET comment_status = '{$approve_decision}' WHERE comment_id = $comment_id ";
     $query_response = mysqli_query($connection,$query);
     confirmQuery($query_response);

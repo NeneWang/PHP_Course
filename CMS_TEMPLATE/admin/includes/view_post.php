@@ -1,6 +1,6 @@
 <?php
 if(isset($_GET['reset_view_count'])){
-    extract($_GET);
+    extract(escape($_GET));
     $query= "UPDATE posts SET post_view_count = 0 WHERE post_id = {$reset_view_count}";
      $query_response = mysqli_query($connection,$query);
     confirmQuery($query_response);  

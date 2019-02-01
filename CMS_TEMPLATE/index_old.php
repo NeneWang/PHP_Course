@@ -23,13 +23,13 @@ include "includes/navigation.php"
                 
             <?php
     if(isset($_GET['author'])){
-        extract($_GET);
+        extract(escape($_GET));
         $query="SELECT * FROM posts WHERE post_status = 'PUBLISHED' AND post_author = '{$author}' ";
     }   
     
             
             elseif(isset($_GET['category'])){
-                extract($_GET);
+                extract(escape($_GET));
                 $query="SELECT * FROM posts WHERE post_status = 'PUBLISHED' AND post_tags = '{$category}'";
                 //echo $query;
             }

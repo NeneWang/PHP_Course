@@ -34,7 +34,7 @@
                  
                     
                     if(isset($_GET['p_id'])){
-                        extract($_GET);
+                        extract(escape($_GET));
                         echo "<li><a href='admin/posts.php?source=edit_post&post_id={$p_id}'>EDIT POST</a></li>";
                     }
                 }

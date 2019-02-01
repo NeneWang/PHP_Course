@@ -1,4 +1,12 @@
 <?php
+
+function escape($string)
+{
+    global $connection;
+    mysqli_real_escape_string ($connection, trim(($string))); // So its corrects each get
+}
+
+
  function insert_categories(){
      global $connection;
        if(isset($_POST["submit"]))
@@ -288,7 +296,7 @@ function usersTableManager(){
      $source="";
     global $connection;
     if(isset($_GET["source"])){
-        extract($_GET); //Extracts $source
+        extract(escape($_GET)); //Extracts $source
         
     }
     switch($source){

@@ -3,7 +3,7 @@ include "includes/db.php";
 include "admin/includes/function.php";
            if(isset($_GET["p_id"]))
            {
-                   extract($_GET); // Gets $p_id
+                   extract(escape($_GET)); // Gets $p_id
                    $query = "SELECT * FROM posts WHERE post_id = $p_id";
                    $select_all_posts_query =  mysqli_query($connection, $query);
                     confirmQuery($select_all_posts_query);

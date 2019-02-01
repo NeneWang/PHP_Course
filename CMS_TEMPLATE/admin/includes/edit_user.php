@@ -36,7 +36,7 @@ if(isset($_POST["edit_user"])){
 }
 
 if(isset($_GET["user_id"])){
-    extract($_GET);
+    extract(escape($_GET));
     //Extracts $post_id
     //TODO extracts Data from the DBase 
     $query = "SELECT * FROM users WHERE user_id = $user_id";

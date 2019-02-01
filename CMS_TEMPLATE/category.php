@@ -25,7 +25,7 @@ include "includes/navigation.php"
     
         
             if(isset($_GET['category'])){
-                extract($_GET); //Extracts the categoty ID
+                extract(escape($_GET)); //Extracts the categoty ID
                 
             }
     
