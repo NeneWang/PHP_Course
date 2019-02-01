@@ -45,11 +45,24 @@
         
         });   
         
-        
+         function loadUsersOnline() 
+            {  
+                $.get("includes/function.php?onlineusers=result",function(data){
+
+                    $(".useronline").text(data-10);
+                    //console.log(data-10);
+
+                });
+            }
+
+            setInterval(function(){
+                        loadUsersOnline();
+                        },500);
+
+            loadUsersOnline();
         
         
        </script>
-       
         <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <script src="https://cdn.ckeditor.com/ckeditor5/11.2.0/classic/ckeditor.js"></script>

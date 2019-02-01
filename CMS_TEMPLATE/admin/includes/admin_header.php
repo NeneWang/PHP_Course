@@ -1,6 +1,8 @@
 <?php ob_start(); ?>
 <?php session_start(); ?>
 <!--<?php include "../includes/db.php" ?>-->
+
+<!--<?php include "./includes/function.php" ?>-->
 <?php 
     extract($_SESSION);
     if(isset($user_role)){
@@ -13,7 +15,7 @@
     }else{
         header("Location: ../index.php");
     }
-
+//$count = getIntUsersOnline();
 ?>
 
 <!DOCTYPE html>

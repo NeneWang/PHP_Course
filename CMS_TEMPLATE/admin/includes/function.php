@@ -89,6 +89,97 @@ function FillTableWithPosts(){
                 
 }
 
+function online_users()
+{
+    
+    
+    if (isset($_GET['onlineusers'])) {
+        
+        if (session_status() == PHP_SESSION_NONE)
+            session_start();
+        
+        global $connection;
+        
+        if (!$connection) {
+            include "db.php";
+        }
+        
+        $session = session_id();
+        
+        $time = time();
+        
+        $time_out_in_seconds = 15;
+        
+        $time_out = $time - $time_out_in_seconds;
+        
+        
+        $query = "SELECT * FROM users_online WHERE session = '$session'";
+        $send_query = mysqli_query($connection, $query);
+        echo $count = mysqli_num_rows($send_query);
+        
+        
+        if ($count == NULL) {
+            
+            
+            mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session','$time')");
+            
+        } else {
+            
+            mysqli_query($connection, "UPDATE users_online SET time = '$time' WHERE session = '$session'");
+            
+        }
+        
+        
+        $users_online_query = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$time_out'");
+        
+        $count_user = mysqli_num_rows($users_online_query);
+//        if($count_user == 12){$count_user=2;}
+//        if($count_user == 2){$count_user=200;} test results : it seems that it prints an 1 from nowhere
+        //$count_user-=10;
+        echo $count_user;
+        
+    }
+    
+}
+online_users();
+//
+//
+//function getIntUsersOnline(){
+//    
+//    if(isset($_GET['onlineusers'])) {
+//    
+//    global $connection;
+//        
+//    if(!$connection){
+//        session_start();
+//        include("../includes/db.php");
+//        
+//        
+//        $session = session_id();
+//        $time = time();
+//        $time_out_in_seconds = 60;
+//        $time_out = $time - $time_out_in_seconds;
+//
+//        $query = "SELECT * FROM users_online WHERE session = '$session'";
+//        $send_query = mysqli_query($connection, $query);
+//        $count = mysqli_num_rows($send_query);
+//
+//        if($count == NULL){
+//            mysqli_query($connection,"INSERT INTO users_online (session,time) VALUES('$session','$time') ");
+//
+//        }else{
+//            mysqli_query($connection,"UPDATE users_online SET time = '$time' WHERE session = '$session' ");
+//        }
+//
+//        $users_online_query = mysqli_query($connection,"SELECT * FROM users_online WHERE time > '$time_out'");
+//
+//        echo $count = mysqli_num_rows($users_online_query);
+//    }
+//    } //Get request isset
+//}
+//
+//getIntUsersOnline();
+
 function FillTableWithUsers(){
     //Get the posts from the databases and display their information in a ta
     global $connection;
