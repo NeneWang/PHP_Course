@@ -37,8 +37,8 @@ if(isset($_GET["approve_decision"])){
                     <div class="col-lg-12">
                         <div>
                             <h1 class="page-header">
-                            Welcome to admin
-                            <small>Author</small>
+                            CREATE USER
+                            <small><?php echo $user_name;?></small>
                         </h1>                        
                         </div>
                         <div>

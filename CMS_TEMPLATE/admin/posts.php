@@ -19,8 +19,8 @@ ob_start();
                     <div class="col-lg-12">
                         <div>
                             <h1 class="page-header">
-                            Welcome to admin
-                            <small>Author</small>
+                            POST ADMIN
+                            <small><?php echo $user_name;?></small>
                         </h1>                        
                         </div>
                         <div>

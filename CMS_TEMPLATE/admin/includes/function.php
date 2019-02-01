@@ -260,7 +260,8 @@ function getCategoryNameByIntId($int_id){
 
 function deletePostByGetRequest(){
     global $connection;
-    if(isset($_GET["delete"])){
+    if(isset($_SESSION['user_id']) && isset($_GET["delete"])){
+        
         $delete = ($_GET["delete"]);
         
         $query = $query = "DELETE FROM posts WHERE post_id = {$delete}";
@@ -272,7 +273,7 @@ function deletePostByGetRequest(){
 
 function deleteUserByGetRequest(){
     global $connection;
-    if(isset($_GET["delete"])){
+    if(isset($_SESSION['user_id']) && isset($_GET["delete"])){
         $delete = ($_GET["delete"]);
         
         $query = $query = "DELETE FROM users WHERE user_id = {$delete}";
@@ -409,7 +410,8 @@ function commentsTableManager(){
     include "view_all_comments.php";
 }
 
-function CreateCategoriesListPick(){
+function CreateCategoriesListPick()
+{
     global $connection;
      $query = "SELECT * FROM categories";
     $select_categories =  mysqli_query($connection, $query);
@@ -421,7 +423,24 @@ function CreateCategoriesListPick(){
         }
 }
 
-function confirmQuery($query){
+function CreateUsersListPick( $alredyPickedUser = "" )
+{
+   
+    global $connection;
+    $query = "SELECT * FROM users";
+    $select_users =  mysqli_query($connection, $query);
+    confirmQuery($select_users);
+    
+    while($row = mysqli_fetch_assoc($select_users)){
+            extract($row);
+            if ($alredyPickedUser != $user_name)
+                echo "<option value='{$user_name}'>{$user_name}</option>";   
+        }
+}
+
+
+function confirmQuery($query)
+{
     global $connection ;
     if(!$query){
        die("Error with the query : ".$query." returned ".mysqli_error($connection));

@@ -54,8 +54,13 @@ if(isset($_GET["post_id"])){
     <div class="form-group"><label for="post_title">Title</label>
     <input value="<?php echo $post_title;?>" type="text" class="form-control" name="post_title"></div>
     
-     <div class="form-group"><label for="post_author">author</label>
-    <input value="<?php echo $post_author;?>" type="text" class="form-control" name="post_author"></div>
+    <div class="form-group">
+         <label for="post_author">author : </label>
+        <select name="post_author" id="">
+            <option value="<?php echo $post_author ?>"><?php echo $post_author ?></option>
+            <?php CreateUsersListPick($post_author); ?>
+        </select>
+    </div>
     
     <div class="form-group"><label for="post_image">image link</label>
     <input value="<?php echo $post_image;?>" type="text" class="form-control" name="post_image"></div>

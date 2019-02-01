@@ -33,8 +33,12 @@ $query .= "VALUES({$post_category_id},'{$post_title}','{$post_author}','{$post_d
     <div class="form-group"><label for="post_title">Title</label>
     <input type="text" class="form-control" name="post_title"></div>
     
-     <div class="form-group"><label for="post_author">author</label>
-    <input type="text" class="form-control" name="post_author"></div>
+     <div class="form-group">
+         <label for="post_author">author : </label>
+        <select name="post_author" id="">
+            <?php CreateUsersListPick(); ?>
+        </select>
+    </div>
     
     <div class="form-group"><label for="post_image">image link</label>
     <input type="text" class="form-control" name="post_image"></div>
